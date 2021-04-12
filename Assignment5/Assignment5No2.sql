@@ -9,8 +9,10 @@ USE ArshpreetAulakh_student_registration;
 -- create the tables for the database
 CREATE TABLE students (
   student_id        INT            PRIMARY KEY   AUTO_INCREMENT,
-  first_name        VARCHAR(255)   NOT NULL,
-  last_name         VARCHAR(255)   NOT NULL      
+  first_name        VARCHAR(50)   NOT NULL,
+  last_name         VARCHAR(50)   NOT NULL,
+  email_address		VARCHAR(50)	   NOT NULL,
+  major				VARCHAR(50)
 );
 
 CREATE TABLE addresses (
@@ -23,24 +25,43 @@ CREATE TABLE addresses (
 );
 
 CREATE TABLE classes (
-  class_id           INT   			PRIMARY KEY   AUTO_INCREMENT,
+  class_id    		 INT   			PRIMARY KEY   AUTO_INCREMENT,
+  class_name		VARCHAR(50)
+);
+
+CREATE TABLE majors (
+  major_id    		 INT   			PRIMARY KEY   AUTO_INCREMENT,
+  major_name		 VARCHAR(50)	NOT NULL,
   student_id         INT   			NOT NULL,
-  subject_area		 VARCHAR(10)	NOT NULL,
-  course_number		 INT 			NOT NULL,
+  
 
 	FOREIGN KEY (student_id)
     REFERENCES students (student_id)
 );
 
+CREATE TABLE registration (
+  registration_id    INT   			PRIMARY KEY   AUTO_INCREMENT,
+  student_id         INT   			NOT NULL,
+  class_id			 INT			NOT NULL,
+  
+
+	FOREIGN KEY (student_id)
+    REFERENCES students (student_id),
+    FOREIGN KEY (class_id)
+    REFERENCES classes(class_id)
+);
+
+
+
 -- Insert data into the tables
-INSERT INTO students (student_id, first_name, last_name) VALUES
-(1, 'Joe', 'Green'),
-(2, 'Sue', 'Smith'),
-(3, 'Nick', 'Green'),
-(4, 'Andy', 'Andrews'),
-(5, 'Greg', 'House'),
-(6, 'Bruce', 'Wayne'),
-(7, 'Clark', 'Kent');
+INSERT INTO students (student_id, first_name, last_name, email_address, major) VALUES
+(1, 'Joe', 'Green', 'Joe@school.edu', 'Programming'),
+(2, 'Sue', 'Smith', 'Sue@school.edu', 'Programming'),
+(3, 'Nick', 'Green', 'Nick@school.edu', 'Networking'),
+(4, 'Andy', 'Andrews', 'Andy@school.edu', 'Networking'),
+(5, 'Greg', 'House', 'Greg@school.edu', 'Medicine'),
+(6, 'Bruce', 'Wayne', 'Bruce@school.edu', 'Finance'),
+(7, 'Clark', 'Kent', 'Clark@school.edu', 'Journalism');
 
 INSERT INTO addresses (address_id, student_id, street_address) VALUES
 (1, 1, '124 Main St.'),
@@ -51,24 +72,16 @@ INSERT INTO addresses (address_id, student_id, street_address) VALUES
 (6, 6, '1007 Mountain Dr.'),
 (7, 7, '344 Clinton St.');
 
-INSERT INTO classes (class_id, student_id, subject_area, course_number) VALUES
-(1, 1, 'IT', 1025),
-(2, 1, 'MATH', 1200),
-(3, 1, 'IT', 1050),
-(4, 2, 'IT', 1025),
-(5, 2, 'IT', 1050),
-(6, 2, 'IT', 2351),
-(7, 3, 'IT', 1025),
-(8, 4, 'IT', 1025),
-(9, 4, 'IT', 1050),
-(10, 5, 'BIO', 2300),
-(11, 5, 'CHEM', 2951),
-(12, 5, 'PHYS', 2200),
-(13, 6, 'ECON', 1100),
-(14, 6, 'FIN', 1025),
-(15, 7, 'ENG', 1025),
-(16, 7, 'JOU', 1400);
+INSERT INTO classes(class_id, class_name) VALUES
+(1, 'IT1025'),
+(2, 'IT1050'),
+(3, 'IT2351'),
+(4, 'MATH1200');
 
+INSERT INTO registration(registration_id, student_id, class_id) VALUES
+(1, 1, 1),
+(2, 1, 4),
+(3, 1, 2);
 
 -- Create a user named mgs_user
 CREATE USER IF NOT EXISTS mgs_user@localhost
