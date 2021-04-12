@@ -29,15 +29,6 @@ CREATE TABLE classes (
   class_name		VARCHAR(50)
 );
 
-CREATE TABLE majors (
-  major_id    		 INT   			PRIMARY KEY   AUTO_INCREMENT,
-  major_name		 VARCHAR(50)	NOT NULL,
-  student_id         INT   			NOT NULL,
-  
-
-	FOREIGN KEY (student_id)
-    REFERENCES students (student_id)
-);
 
 CREATE TABLE registration (
   registration_id    INT   			PRIMARY KEY   AUTO_INCREMENT,
@@ -76,12 +67,26 @@ INSERT INTO classes(class_id, class_name) VALUES
 (1, 'IT1025'),
 (2, 'IT1050'),
 (3, 'IT2351'),
-(4, 'MATH1200');
+(4, 'MATH1200'),
+(5, 'CHEM 2020'),
+(6, 'ECON 3000'),
+(7, 'JOUR 1200');
 
 INSERT INTO registration(registration_id, student_id, class_id) VALUES
 (1, 1, 1),
 (2, 1, 4),
-(3, 1, 2);
+(3, 1, 2),
+(4, 2, 1),
+(5, 2, 2),
+(6, 2, 3),
+(7, 3, 1),
+(8, 4, 1),
+(9, 4, 2),
+(10, 5, 4),
+(11, 5, 5),
+(12, 6, 6),
+(13, 7, 7);
+
 
 -- Create a user named mgs_user
 CREATE USER IF NOT EXISTS mgs_user@localhost
