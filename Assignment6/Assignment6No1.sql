@@ -12,7 +12,7 @@ DELIMITER //
 CREATE PROCEDURE productCount()
 BEGIN
 	DECLARE count INT;
-	
+    
     SELECT (COUNT(product_id))
     FROM products;
     
