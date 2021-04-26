@@ -9,14 +9,16 @@ DELIMITER //
 
 CREATE EVENT yearly_product_order_audit
 ON SCHEDULE EVERY 1 YEAR
-STARTS '2021-04-24'
+STARTS '2021-04-24' -- starts at 00:00 of date
 DO BEGIN
 	SELECT product_id, product_name, quantity
     FROM products
 		JOIN order_items USING (product_id)
     GROUP BY product_id, quantity
     HAVING SUM(quantity) = 0;
-
+-- tested this part by running a separate query to see output
 END//
 
 DELIMITER ;
+
+-- verified this works by SHOW EVENTS query

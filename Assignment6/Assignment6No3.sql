@@ -7,7 +7,6 @@
 
 DROP FUNCTION IF EXISTS discount_price;
 
--- Change statement delimiter from semicolon to double front slash
 DELIMITER //
 
 CREATE FUNCTION discount_price (
@@ -15,6 +14,7 @@ CREATE FUNCTION discount_price (
 )
 RETURNS DECIMAL(9, 2)
 DETERMINISTIC READS SQL DATA
+-- this means it reads data but doesn't write anything to db && it always produces the same results
 BEGIN
 	DECLARE discount_price_var DECIMAL(9,2);
     

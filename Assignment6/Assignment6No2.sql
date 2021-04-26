@@ -26,6 +26,8 @@ BEGIN
 	END IF;
 END//
 
+-- thought about adding commit and rollback but directions state to use general script structure in book and figure 15-9 does not have them
+
 -- Change statement delimiter back to semicolon
 DELIMITER ;
 
