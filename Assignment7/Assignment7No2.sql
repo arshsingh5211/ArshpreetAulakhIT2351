@@ -6,6 +6,8 @@
 -- ***********************************************************************************************************
 USE ap;
 
+DROP PROCEDURE IF EXISTS test;
+
 DELIMITER //
 
 CREATE PROCEDURE test()
@@ -42,5 +44,7 @@ END//
 DELIMITER ;
 
 CALL test();
+
+-- verified this worked correctly by running a select statement to look at the table
     
     
